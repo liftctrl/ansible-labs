@@ -1,72 +1,90 @@
-# 01-change-yum-repo (Rocky Linux 9)
+# 01-change-yum-repo
 
 ## 📝 Objective
 
-Use Ansible to configure YUM/DNF repositories on Rocky Linux 9 systems by replacing the default system repositories with a custom mirror (e.g., Alibaba Cloud, mirrors.ustc.edu.cn, etc.).
+Automate the process of switching Rocky Linux 9's default YUM/DNF repositories to Alibaba Cloud mirrors using Ansible.
 
 ---
 
-## 📁 Directory Structure
+## 📁 Project Structure
 
 ```bash
 01-change-yum-repo/
-├── inventory
-├── playbook.yaml
-└── README.md
+├── playbook.yml  # Main Ansible playbook
+├── inventory     # Host inventory file
+└── README.md     # This documentation
 ```
+
 
 ---
 
 ## ⚙️ Requirements
 
-- Control node with Ansible installed (v2.9+; ideally v2.13+ for Rocky 9 support)
-- Managed node(s) running Rocky Linux 9
-- SSH access and `sudo` privileges on the managed nodes
+- Ansible 2.9 or higher (recommend 2.13+ for Rocky 9 compatibility)
+- One or more managed nodes running Rocky Linux 9
+- SSH access to managed nodes
+- `sudo` privileges on target machines
 
 ---
 
-## 📜 Tasks Performed
+## 📜 Playbook Summary
 
-- Backup existing `.repo` files from `/etc/yum.repos.d/`
-- Replace with a new `.repo` file pointing to a custom Rocky Linux 9 mirror
-- Run `dnf clean all && dnf makecache` to refresh metadata
+This playbook performs the following:
+
+1. Updates BaseOS, AppStream, and Extras repositories in:
+   - `/etc/yum.repos.d/rocky.repo`
+   - `/etc/yum.repos.d/rocky-extras.repo`
+
+2. Replaces `mirrorlist=` with a commented line to disable it
+
+3. Sets `baseurl=` to Alibaba Cloud’s Rocky Linux 9 mirrors
+
+4. Refreshes the local YUM/DNF metadata using `dnf makecache`
 
 ---
 
-## 🚀 How to Run
+## 🚀 How to Use
+
+### 1. Edit the `inventory` file
+
+Example:
+
+```bash
+[rocky9]
+192.168.1.10 ansible_user=root
+```
+
+
+### 2. Run the playbook
 
 ```bash
 ansible-playbook -i inventory playbook.yml
 ```
-
-To specify a remote user and elevate privileges:
-
+If using a non-root user:
 ```bash
 ansible-playbook -i inventory playbook.yml -u your_user --ask-become-pass
 ```
 
----
+## ✅ Verification
 
-## ✅ How to Verify
-
-- Check contents of /etc/yum.repos.d/ to ensure new repo files exist
-- Confirm mirror URLs point to your intended source
-- Run:
+- Check that the following repo files were updated:
+  - /etc/yum.repos.d/rocky.repo
+  - /etc/yum.repos.d/rocky-extras.repo
+- Run the following command on the target node:
 ```bash
 dnf repolist
 ```
-You should see repositories from your configured mirror.
-
----
+You should see repository base URLs pointing to mirrors.aliyun.com.
 
 ## 📚 References
-
+    
 - Rocky Linux Mirror List
+- Alibaba Cloud Open Source Mirror
 - Ansible Documentation
-- DNF (YUM) Docs for RHEL-based distros
+- DNF Command Reference
 
 ## 🧩 Notes
 
-> On Rocky Linux 9, dnf replaces yum as the default package manager. However, yum is still a symlink to dnf for backward compatibility.
+- This playbook is specific to Rocky Linux 9. If you need compatibility with Rocky 8 or RHEL, you may need to adjust the repository paths or mirror URLs.
+- YUM is symlinked to DNF on Rocky 9; both commands work, but DNF is preferred.
 
----
