@@ -1,0 +1,44 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    aliyun_baseos_url: https://mirrors.aliyun.com/rockylinux/$releasever/BaseOS/$basearch/os/
+    aliyun_appstream_url: https://mirrors.aliyun.com/rockylinux/$releasever/AppStream/$basearch/os/
+    aliyun_extras_url: https://mirrors.aliyun.com/rockylinux/$releasever/extras/$basearch/os/
+
+  tasks:
+    - name: Set BaseOS repository to Alibaba Cloud mirror
+      ansible.builtin.ini_file:
+        path: /etc/yum.repos.d/rocky.repo
+        section: baseos
+        option: baseurl
+        value: "{{ aliyun_baseos_url }}"
+
+    - name: Set AppStream repository to Alibaba Cloud mirror
+      ansible.builtin.ini_file:
+        path: /etc/yum.repos.d/rocky.repo
+        section: appstream
+        option: baseurl
+        value: "{{ aliyun_appstream_url }}"
+
+    - name: Set Extras repository to Alibaba Cloud mirror
+      ansible.builtin.ini_file:
+        path: /etc/yum.repos.d/rocky-extras.repo
+        section: extras
+        option: baseurl
+        value: "{{ aliyun_extras_url }}"
+
+    - name: Disable mirrorlist and comment it out
+      ansible.builtin.replace:
+        path: "{{ item }}"
+        regexp: '^mirrorlist=(.*)$'
+        replace: '#mirrorlist=\1'
+        backup: yes
+      loop:
+        - /etc/yum.repos.d/rocky.repo
+        - /etc/yum.repos.d/rocky-extras.repo
+
+    - name: Refresh YUM/DNF metadata
+      ansible.builtin.command: dnf makecache --refresh
+      register: makecache_output
+      changed_when: false
