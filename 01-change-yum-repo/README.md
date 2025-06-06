@@ -76,13 +76,6 @@ dnf repolist
 ```
 You should see repository base URLs pointing to mirrors.aliyun.com.
 
-## 📚 References
-    
-- Rocky Linux Mirror List
-- Alibaba Cloud Open Source Mirror
-- Ansible Documentation
-- DNF Command Reference
-
 ## 🧩 Notes
 
 - This playbook is specific to Rocky Linux 9. If you need compatibility with Rocky 8 or RHEL, you may need to adjust the repository paths or mirror URLs.
