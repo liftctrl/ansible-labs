@@ -11,11 +11,11 @@ Use Ansible to deploy a simple Node.js Express application with npm and Forever 
 ```bash
 02-deploy-nodejs-app/
 ├── playbook.yml # Main Ansible playbook
-├── inventory # Host inventory file
-├── app/ # Example Node.js app source folder (copied to target)
+├── hosts        # Host inventory file
+├── app/         # Example Node.js app source folder (copied to target)
 │ ├── app.js
 │ └── package.json
-└── README.md # This documentation
+└── README.md    # This documentation
 ```
 
 ---
@@ -51,8 +51,8 @@ This playbook performs the following tasks:
 Example:
 
 ```bash
-[nodejs]
-192.168.1.20 ansible_user=root
+[test]
+192.168.122.51
 ```
 
 ### 2. Ensure your `app/` folder contains:

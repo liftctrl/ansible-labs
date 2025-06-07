@@ -11,7 +11,7 @@ Automate the process of switching Rocky Linux 9's default YUM/DNF repositories t
 ```bash
 01-change-yum-repo/
 ├── playbook.yml  # Main Ansible playbook
-├── inventory     # Host inventory file
+├── hosts         # Host inventory file
 └── README.md     # This documentation
 ```
 
@@ -45,24 +45,24 @@ This playbook performs the following:
 
 ## 🚀 How to Use
 
-### 1. Edit the `inventory` file
+### 1. Edit the `hosts` file
 
 Example:
 
 ```bash
-[rocky9]
-192.168.1.10 ansible_user=root
+[test]
+192.168.122.51
 ```
 
 
 ### 2. Run the playbook
 
 ```bash
-ansible-playbook -i inventory playbook.yml
+ansible-playbook -i hosts playbook.yml
 ```
 If using a non-root user:
 ```bash
-ansible-playbook -i inventory playbook.yml -u your_user --ask-become-pass
+ansible-playbook -i hosts playbook.yml -u your_user --ask-become-pass
 ```
 
 ## ✅ Verification
