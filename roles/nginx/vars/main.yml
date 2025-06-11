@@ -1,0 +1,6 @@
+---
+# vars file for roles/nginx
+
+# nginx_config.j2
+
+nginx_root: /usr/share/nginx/html

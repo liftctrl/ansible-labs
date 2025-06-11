@@ -1,0 +1,24 @@
+- name: ensure document root exists
+  ansible.builtin.file:
+    path: "{{ nginx_root }}"
+    state: directory
+    owner: nginx
+    group: nginx
+    mode: 0755
+
+- name: deploy index.html from templete
+  ansible.builtin.copy:
+    src: nginx_index.html
+    dest: "{{ nginx_root }}/index.html"
+    owner: nginx
+    group: nginx
+    mode: 0664
+
+- name: deploy nginx site config
+  ansible.builtin.template:
+    src: nginx_config.j2
+    dest: /etc/nginx/conf.d/my_site.conf
+    owner: nginx
+    group: nginx
+    mode: 0644
+  notify: reload_nginx

@@ -1,0 +1,17 @@
+---
+# tasks file for roles/nginx
+
+- name: install nginx
+  import_tasks: install.yml
+
+- name: config nginx
+  import_tasks: config.yml
+
+- name: start and enable nginx
+  import_tasks: service.yml
+
+- name: config selinux
+  import_tasks: selinux.yml
+
+- name: config firewall
+  import_tasks: firewall.yml

@@ -1,0 +1,4 @@
+- name: config selinux
+  ansible.posix.selinux:
+    policy: targeted
+    state: disabled

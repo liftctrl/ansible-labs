@@ -1,0 +1,7 @@
+---
+# defaults file for roles/nginx
+
+# nginx_config.j2
+
+listen_port: 8080
+server_name: 192.168.122.51

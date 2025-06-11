@@ -1,0 +1,15 @@
+---
+
+- name: deploy nginx
+  hosts: nginx
+  become: true
+
+  pre_tasks:
+
+    - name: upate all packages
+      ansible.builtin.dnf:
+        update_cache: yes
+      changed_when: false
+
+  roles:
+    - nginx
