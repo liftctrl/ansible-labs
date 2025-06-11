@@ -1,0 +1,8 @@
+---
+
+- name: start_mysql
+  become: true
+  ansible.builtin.systemd:
+    name: mysqld
+    state: started
+    enabled: true

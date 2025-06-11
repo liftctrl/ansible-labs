@@ -1,0 +1,21 @@
+[client]
+port = {{ mysql_port | default(3306, true) }}
+socket = {{ mysql_socket | default('/var/lib/mysql/mysql.sock', true) }}
+
+[mysqld]
+port = {{ mysql_port | default(3306, true) }}
+socket = {{ mysql_socket | default('/var/lib/mysql/mysql.sock', true) }}
+datadir = {{ mysql_datadir | default('/var/lib/mysql', true) }}
+max_connections = {{ mysql_max_connections | default(200, true) }}
+default-storage-engine = {{ mysql_storage_engine | default('InnoDB', true) }}
+character-set-server = {{ mysql_charset | default('utf8mb4', true) }}
+collation-server = {{ mysql_collation | default('utf8mb4_unicode_ci', true) }}
+log-error = {{ mysql_error_log | default('/var/log/mysql/error.log', true) }}
+pid-file = {{ mysql_pid_file | default('/var/run/mysqld/mysqld.pid', true) }}
+
+[mysqldump]
+quick
+max_allowed_packet = {{ mysql_max_allowed_packet | default('64M', true) }}
+
+[mysql]
+default-character-set = {{ mysql_client_charset | default('utf8mb4', true) }}

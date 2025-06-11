@@ -1,0 +1,16 @@
+---
+
+- name: install mysql
+  import_tasks: install.yml
+
+- name: config mysql
+  import_tasks: config.yml
+
+- name: secure mysql
+  import_tasks: secure.yml
+
+- name: config selinux
+  import_tasks: selinux.yml
+
+- name: config firewall
+  import_tasks: firewall.yml

@@ -1,0 +1,19 @@
+- name: ensure mysql datadir exists
+  ansible.builtin.file:
+    path: /var/lib/mysql
+    state: directory
+    owner: mysql
+    group: mysql
+    mode: 0755
+
+- name: deploy my.cnf.j2
+  template:
+    src: my.cnf.j2
+    dest: /etc/my.cnf
+    owner: root
+    group: root
+    mode: 0644
+  notify: start_mysql
+
+- name: flush handlers to rstart mysql immediately
+  meta: flush_handlers

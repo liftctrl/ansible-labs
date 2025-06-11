@@ -1,0 +1,15 @@
+- name: install mysql
+  ansible.builtin.dnf:
+    name: mysql-server
+    state: present
+
+- name: install python3-pip
+  ansible.builtin.dnf:
+    name: 
+      - python3-pip
+    state: present
+
+- name: install PyMySQL
+  ansible.builtin.pip:
+    name: PyMySQL
+    executable: pip3

@@ -1,0 +1,44 @@
+- name: secure mysql installation
+  community.mysql.mysql_user:
+    name: root
+    host: localhost
+    password: "{{ mysql_root_password }}"
+    login_user: root
+    login_unix_socket: "{{ mysql_socket }}"
+  ignore_errors: true
+
+- name: remove annoymous user account for localhost
+  community.mysql.mysql_user:
+    name: ''
+    host_all: true
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    login_host: localhost
+    state: absent
+
+- name: disallow root login remotely 
+  community.mysql.mysql_user:
+    name: root
+    host: "%"
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    login_host: localhost
+    state: absent
+
+- name: remove mysql test database
+  community.mysql.mysql_db:
+    name: test
+    state: absent
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    login_host: localhost
+
+- name: reload privilege
+  community.mysql.mysql_user:
+    priv: "*.*:USAGE"
+    state: present
+    name: root
+    host: localhost
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    login_host: localhost

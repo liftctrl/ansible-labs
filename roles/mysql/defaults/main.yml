@@ -1,0 +1,15 @@
+---
+
+mysql_port: 3306
+mysql_socket: /var/lib/mysql/mysql.sock
+mysql_datadir: /var/lib/mysql
+mysql_max_connections: 200
+mysql_storage_engine: InnoDB
+mysql_charset: utf8mb4
+mysql_collation: utf8mb4_unicode_ci
+mysql_error_log: /var/log/mysql/error.log
+mysql_pid_file: /var/run/mysqld/mysqld.pid
+mysql_max_allowed_packet: 64M
+mysql_client_charset: utf8mb4
+
+mysql_root_password: Yxz194124!
