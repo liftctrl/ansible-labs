@@ -1,0 +1,17 @@
+---
+
+registry_mirrors:
+  - "https://dockerproxy.net"
+log_driver: "json-file"
+live_restore: "true"
+log_max_size: "10m"
+log_max_file: "3"
+ipv6: "false"
+storage_driver: "overlay2"
+dns_servers:
+  - "8.8.8.8"
+  - "8.8.4.4"
+data_root: "/mnt/docker-data"
+max_concurrent_downloads: 5
+
+user_name: yang

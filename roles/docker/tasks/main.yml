@@ -1,0 +1,13 @@
+---
+
+- name: install docker
+  import_tasks: install.yml
+
+- name: config docker
+  import_tasks: config.yml
+
+- name: config selinux
+  import_tasks: selinux.yml
+
+- name: start and enable docker
+  import_tasks: service.yml

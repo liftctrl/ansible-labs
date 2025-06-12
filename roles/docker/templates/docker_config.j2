@@ -1,0 +1,14 @@
+{
+  "registry-mirrors": {{ registry_mirrors | to_json }},
+  "log-driver": "{{ log_driver }}",
+  "live-restore": {{ live_restore }},
+  "log-opts": {
+    "max-size": "{{ log_max_size }}",
+    "max-file": "{{ log_max_file }}"
+  },
+  "ipv6": {{ ipv6 }},
+  "storage-driver": "{{ storage_driver }}",
+  "dns": {{ dns_servers | to_json }},
+  "data-root": "{{ data_root }}",
+  "max-concurrent-downloads": {{ max_concurrent_downloads }}
+}
