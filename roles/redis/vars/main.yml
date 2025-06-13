@@ -1,0 +1,7 @@
+---
+
+# Disable dangerous commands in production
+redis_rename_flushall: '""'
+redis_rename_flushdb: '""'
+redis_rename_config: '""'
+redis_rename_shutdown: '""'

@@ -1,0 +1,15 @@
+---
+
+- name: deploy redis
+  hosts: redis
+  become: true
+
+  pre_tasks:
+
+    - name: update all packages 
+      ansible.builtin.dnf:
+        update_cache: yes
+      changed_when: false
+
+  roles:
+    - redis

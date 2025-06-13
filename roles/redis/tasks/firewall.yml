@@ -1,0 +1,8 @@
+- name: config firewall
+  ansible.posix.firewalld:
+    port: 6379/tcp
+    permanent: true
+    state: enabled
+
+- name: reload firewall
+  ansible.builtin.command: firewall-cmd --reload

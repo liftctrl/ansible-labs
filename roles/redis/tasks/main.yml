@@ -1,0 +1,13 @@
+---
+
+- name: install redis
+  import_tasks: install.yml
+
+- name: config redis
+  import_tasks: config.yml
+
+- name: config selinux
+  import_tasks: selinux.yml
+
+- name: config firewall
+  import_tasks: firewall.yml

@@ -1,0 +1,6 @@
+---
+
+- name: restart_redis
+  ansible.builtin.systemd:
+    name: redis
+    state: started

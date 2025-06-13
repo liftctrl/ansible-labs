@@ -1,0 +1,46 @@
+# NETWORK
+bind {{ redis_bind }}
+protected-mode {{ redis_protected_mode }}
+port {{ redis_port }}
+tcp-keepalive {{ redis_tcp_keepalive }}
+
+# DAEMON & SUPERVISION
+daemonize {{ redis_daemonize }}
+supervised {{ redis_supervised }}
+pidfile {{ redis_pidfile }}
+
+# LOGGING
+loglevel {{ redis_loglevel }}
+logfile {{ redis_logfile }}
+
+# MEMORY
+maxmemory {{ redis_maxmemory }}
+maxmemory-policy {{ redis_maxmemory_policy }}
+
+# SNAPSHOTS (RDB)
+save 900 1
+save 300 10
+save 60 10000
+dbfilename {{ redis_dbfilename }}
+dir {{ redis_data_dir }}
+
+# APPEND-ONLY FILE (AOF)
+appendonly {{ redis_appendonly }}
+appendfilename "{{ redis_appendfilename }}"
+appendfsync {{ redis_appendfsync }}
+
+# SECURITY
+requirepass {{ redis_password }}
+rename-command FLUSHALL {{ redis_rename_flushall }}
+rename-command FLUSHDB {{ redis_rename_flushdb }}
+rename-command CONFIG {{ redis_rename_config }}
+rename-command SHUTDOWN {{ redis_rename_shutdown }}
+
+# CLUSTER MODE
+cluster-enabled {{ redis_cluster_enabled }}
+cluster-config-file {{ redis_cluster_config_file }}
+cluster-node-timeout {{ redis_cluster_node_timeout }}
+cluster-require-full-coverage {{ redis_cluster_full_coverage }}
+
+# CLIENT TIMEOUTS
+timeout {{ redis_timeout }}

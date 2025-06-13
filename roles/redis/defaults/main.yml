@@ -1,0 +1,32 @@
+---
+
+redis_bind: 0.0.0.0
+redis_protected_mode: "yes"
+redis_port: 6379
+redis_tcp_keepalive: 300
+
+redis_daemonize: "no"
+redis_supervised: systemd
+redis_pidfile: /var/run/redis/redis-server.pid
+
+redis_loglevel: notice
+redis_logfile: /var/log/redis/redis-server.log
+
+redis_maxmemory: 4gb
+redis_maxmemory_policy: allkeys-lru
+
+redis_dbfilename: dump.rdb
+redis_data_dir: /var/lib/redis
+
+redis_appendonly: "yes"
+redis_appendfilename: appendonly.aof
+redis_appendfsync: everysec
+
+redis_password: StrongRedisP@ssw0rd
+
+redis_cluster_enabled: "no"
+redis_cluster_config_file: nodes.conf
+redis_cluster_node_timeout: 5000
+redis_cluster_full_coverage: "yes"
+
+redis_timeout: 0
